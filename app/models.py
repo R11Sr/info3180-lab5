@@ -1,5 +1,8 @@
 from . import db
 from werkzeug.security import generate_password_hash
+from flask_wtf import FlaskForm
+from wtforms import StringField,PasswordField
+from wtforms.validators import DataRequired, InputRequired
 
 class UserProfile(db.Model):
     # You can use this to change the table name. The default convention is to use
@@ -38,3 +41,9 @@ class UserProfile(db.Model):
     def __repr__(self):
         return f"<User: {self.username}, id: {self.id} >"
         # return '<User %r>' % (self.username)
+
+
+class LoginForm(FlaskForm):
+    username = StringField('username',validators=[InputRequired()])
+    password = StringField('password',validators=[InputRequired()])
+    
